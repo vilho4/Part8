@@ -1,8 +1,13 @@
 const Authors = (props) => {
+  // console.log(props)
   if (!props.show) {
     return null
   }
-  const authors = []
+
+  if (!props.data) {
+    return <div>loading...</div>
+  }
+  const authors = props.data.allAuthors
 
   return (
     <div>

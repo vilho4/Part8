@@ -1,9 +1,18 @@
 const Books = (props) => {
+  // // console.log(props)
   if (!props.show) {
     return null
   }
 
-  const books = []
+  if (!props.data) {
+    return <div>loading...</div>
+  }
+
+  // if (props.show === true) {
+  // //   console.log(props.data.allBooks)
+  // }
+
+  const books = props.data.allBooks
 
   return (
     <div>
