@@ -1,33 +1,35 @@
-const Authors = (props) => {
-  // console.log(props)
-  if (!props.show) {
+import SetBirthYear from './SetBirthYear'
+
+const Authors = ({ show, data, onEdit }) => {
+  if (!show) {
     return null
   }
 
-  if (!props.data) {
-    return <div>loading...</div>
-  }
-  const authors = props.data.allAuthors
+  const authors = data.allAuthors
 
   return (
     <div>
-      <h2>authors</h2>
+      <h2>Authors</h2>
       <table>
-        <tbody>
+        <thead>
           <tr>
-            <th></th>
-            <th>born</th>
-            <th>books</th>
+            <th>Name</th>
+            <th>Born</th>
+            <th>Books</th>
           </tr>
+        </thead>
+        <tbody>
           {authors.map((a) => (
             <tr key={a.name}>
               <td>{a.name}</td>
-              <td>{a.born}</td>
+              <td>{a.born ?? '—'}</td>
               <td>{a.bookCount}</td>
             </tr>
           ))}
         </tbody>
       </table>
+
+      <SetBirthYear authors={authors} onSubmit={onEdit} />
     </div>
   )
 }
