@@ -16,3 +16,4 @@ yarn-error.log*
 # Ignore .rest folder and files
 .rest/
 
+seed.js
