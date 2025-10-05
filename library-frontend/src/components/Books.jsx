@@ -1,5 +1,8 @@
+import { useState } from 'react'
+
 const Books = (props) => {
-  // // console.log(props)
+  const [selectedGenre, setSelectedGenre] = useState(null)
+
   if (!props.show) {
     return null
   }
@@ -8,27 +11,40 @@ const Books = (props) => {
     return <div>loading...</div>
   }
 
-  // if (props.show === true) {
-  // //   console.log(props.data.allBooks)
-  // }
-
   const books = props.data.allBooks
+
+  const genres = [...new Set(books.flatMap((book) => book.genres))]
+
+  const filteredBooks = selectedGenre
+    ? books.filter((book) => book.genres.includes(selectedGenre))
+    : books
 
   return (
     <div>
-      <h2>books</h2>
+      <h2>Books</h2>
 
+      <div>
+        <strong>Filter by genre:</strong>{' '}
+        <button onClick={() => setSelectedGenre(null)}>all genres</button>
+        {genres.map((g) => (
+          <button key={g} onClick={() => setSelectedGenre(g)}>
+            {g}
+          </button>
+        ))}
+      </div>
       <table>
-        <tbody>
+        <thead>
           <tr>
-            <th></th>
-            <th>author</th>
-            <th>published</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Published</th>
           </tr>
-          {books.map((a) => (
-            <tr key={a.title}>
+        </thead>
+        <tbody>
+          {filteredBooks.map((a) => (
+            <tr key={a.id}>
               <td>{a.title}</td>
-              <td>{a.author}</td>
+              <td>{a.author.name}</td>
               <td>{a.published}</td>
             </tr>
           ))}

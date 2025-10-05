@@ -1,9 +1,8 @@
 import SetBirthYear from './SetBirthYear'
 
 const Authors = ({ show, data, onEdit }) => {
-  if (!show) {
-    return null
-  }
+  if (!show) return null
+  if (!data || !data.allAuthors) return <div>Loading authors...</div>
 
   const authors = data.allAuthors
 
